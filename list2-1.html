@@ -24,11 +24,9 @@
       }
 
       let message = 'お名前をどうぞ:';
-      let in_val = '';
 
       let doChange = (event) => {
-        in_val = event.target.value;
-        message = 'こんにちは、' + in_val + 'さん';
+        message = 'こんにちは、' + event.target.value + 'さん';
       }
 
       let doAction = (event) => {
