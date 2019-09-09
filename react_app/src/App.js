@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import Rect from './Rect';
 import './App.css';
 
 class App extends Component {
-  input = '';
+  input = 'xx';
 
   msgStyle = {
     fontSize: "20pt",
     color: "#900",
     margin: "20px 0px",
+    padding: "5px",
+  }
+
+  inputStyle = {
+    fontSize: "12pt",
     padding: "5px",
   }
 
@@ -26,7 +30,7 @@ class App extends Component {
   }
 
   doSubmit(event) {
-    this.setState( {
+    this.setState({
       message: 'Hello, ' + this.input + '!!'
     });
     event.preventDefault();
@@ -35,86 +39,15 @@ class App extends Component {
   render() {
     return <div>
       <h1>React</h1>
-      <Message title="Children!">
-        これはコンポーネント内の。コンテンツです。
-        マルでテキストを分割し、リストにして表示します。
-        改行は必要ありません。
-      </Message>
+      <h2>{this.state.message}</h2>
+      <form onSubmit={this.doSubmit}>
+        <label>
+          <span style={this.inputStyle}></span>Message:
+          <input type="text" style={this.inputStyle} onChange={this.doChange}/>
+        </label>
+        <input type="submit" style={this.inputStyle} value="click"/>
+      </form>
     </div>;
-  }
-}
-
-class Message extends Component {
-  li = {
-    fontSize: "16pt",
-    color: "#06",
-    margin: "0px",
-    padding: "0px",
-  }
-
-  render() {
-    let content = this.props.children;
-    let arr = content.split('。');
-    let arr2 = [];
-    for(let i = 0; i < arr.length; i++) {
-      if (arr[i].trim() != '') {
-        arr2.push(arr[i])
-      }
-    }
-    let list = arr2.map((value, key) => (
-      <li style={this.li} key={key}>{value}.</li>)
-    );
-    return <div>
-        <h2>{this.props.title}</h2>
-        <ol>{list}</ol>
-      </div>
-  }
-}
-
-class List extends Component {
-  number = 1;
-
-  title = {
-    fontSize: "20pt",
-    fontWeight: "bold",
-    color: "blue",
-  };
-
-  render() {
-    let data = this.props.data;
-    return (
-      <div>
-        <p style={this.title}>{this.props.title}</p>
-        <ul>
-          {data.map((item) =>
-            <Item number={this.number++} value={item} key={this.number}/>
-          )}
-        </ul>
-      </div>
-    );
-  }
-}
-
-class Item extends Component {
-  li = {
-    listStyleType: "square",
-    fontSize: "16pt",
-    color: "#06",
-    margin: "0px",
-    padding: "0px",
-  }
-  num = {
-    fontWeight: "bold",
-    color: "red",
-  }
-
-  render() {
-    return (
-      <li style={this.li}>
-        <span style={this.num}> [{this.props.number}] </span>
-        {this.props.value}
-      </li>
-    );
   }
 }
 
